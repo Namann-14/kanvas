@@ -9,7 +9,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Kanvas",
+  title: "kanvas",
   description: "A simple note-taking app built with Next.js and Prisma.",
 };
 
