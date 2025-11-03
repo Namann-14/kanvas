@@ -18,7 +18,7 @@ const transitionVariants = {
       filter: "blur(0px)",
       y: 0,
       transition: {
-        type: "spring",
+        type: "spring" as const,
         bounce: 0.3,
         duration: 1.5,
       },
@@ -131,7 +131,7 @@ export function HeroSection() {
                 >
                   <div
                     key={1}
-                    className="bg-foreground/10 rounded-[14px] border p-0.5"
+                    className="bg-foreground/10 rounded-xl border p-0.5"
                   >
                     <Button
                       asChild
