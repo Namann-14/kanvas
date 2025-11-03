@@ -3,20 +3,32 @@
 import SignIn from "@/components/sign-in";
 import { SignUp } from "@/components/sign-up";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { client } from "@/lib/auth-client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { toast } from "sonner";
-import { getCallbackURL } from "@/lib/shared";
+// import { client } from "@/lib/auth-client";
+// import { useRouter, useSearchParams } from "next/navigation";
+// import { useEffect } from "react";
+// import { toast } from "sonner";
+// import { getCallbackURL } from "@/lib/shared";
 
 export default function Page() {
-  const router = useRouter();
-  const params = useSearchParams();
+  // const router = useRouter();
+  // const params = useSearchParams();
+
+  // Google One Tap disabled due to FedCM requirements
+  // Use the "Continue with Google" button instead for reliable OAuth flow
+  /*
   useEffect(() => {
     client.oneTap({
       fetchOptions: {
         onError: ({ error }) => {
-          toast.error(error.message || "An error occurred");
+          // Silently fail for FedCM and credential errors (these are expected when FedCM is not properly configured)
+          const isFedCMError = error.message?.includes('FedCM') || 
+                               error.message?.includes('IdentityCredentialError') ||
+                               error.message?.includes('AbortError') ||
+                               error.message?.includes('retrieving a token');
+          
+          if (!isFedCMError) {
+            toast.error(error.message || "An error occurred");
+          }
         },
         onSuccess: () => {
           toast.success("Successfully signed in");
@@ -25,6 +37,7 @@ export default function Page() {
       },
     });
   }, [router, params]);
+  */
 
   return (
     <div className="w-full space-y-6">

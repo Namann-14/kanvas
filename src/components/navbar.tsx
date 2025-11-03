@@ -96,7 +96,7 @@ export function Navbar() {
                   size="sm"
                   className={cn(isScrolled && "lg:hidden")}
                 >
-                  <Link href="#">
+                  <Link href="/sign-in">
                     <span>Login</span>
                   </Link>
                 </Button>

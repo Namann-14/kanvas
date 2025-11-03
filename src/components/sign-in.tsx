@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import { Button } from "@/components/ui/button";
 import {
@@ -132,10 +133,16 @@ export default function SignIn() {
               variant="outline"
               className={cn("w-full gap-2 flex relative")}
               onClick={async () => {
-                await signIn.social({
-                  provider: "google",
-                  callbackURL: "/dashboard",
-                });
+                try {
+                  await signIn.social({
+                    provider: "google",
+                    callbackURL: "/dashboard",
+                  });
+                } catch (error: unknown) {
+                  toast.error(
+                    "Google sign-in is not configured yet. Please use email/password.",
+                  );
+                }
               }}
             >
               <svg
@@ -168,10 +175,16 @@ export default function SignIn() {
               variant="outline"
               className={cn("w-full gap-2 flex items-center relative")}
               onClick={async () => {
-                await signIn.social({
-                  provider: "github",
-                  callbackURL: "/dashboard",
-                });
+                try {
+                  await signIn.social({
+                    provider: "github",
+                    callbackURL: "/dashboard",
+                  });
+                } catch (error: unknown) {
+                  toast.error(
+                    "GitHub sign-in is not configured yet. Please use email/password.",
+                  );
+                }
               }}
             >
               <svg
@@ -192,10 +205,16 @@ export default function SignIn() {
               variant="outline"
               className={cn("w-full gap-2 flex items-center relative")}
               onClick={async () => {
-                await signIn.social({
-                  provider: "microsoft",
-                  callbackURL: "/dashboard",
-                });
+                try {
+                  await signIn.social({
+                    provider: "microsoft",
+                    callbackURL: "/dashboard",
+                  });
+                } catch (error: unknown) {
+                  toast.error(
+                    "Microsoft sign-in is not configured yet. Please use email/password.",
+                  );
+                }
               }}
             >
               <svg
