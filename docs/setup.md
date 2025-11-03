@@ -1,3 +1,8 @@
+---
+title: Setup Guide
+description: Complete guide to setting up Kanvas development environment
+---
+
 # ⚙️ Kanvas — Setup Guide
 
 This comprehensive guide will walk you through setting up **Kanvas** from scratch, ensuring you have a fully functional development environment.
@@ -97,7 +102,7 @@ npx prisma init
 
 Create a `.env` file in the root directory:
 
-```env
+```bash
 # Database URLs
 DATABASE_URL="postgresql://postgres.xxxxx:password@aws-0-region.pooler.supabase.com:6543/postgres?pgbouncer=true"
 DIRECT_URL="postgresql://postgres.xxxxx:password@aws-0-region.pooler.supabase.com:5432/postgres"

@@ -1,3 +1,8 @@
+---
+title: Product Requirements Document
+description: Kanvas product requirements and feature specifications
+---
+
 # 📋 Kanvas — Product Requirements Document (PRD)
 
 ## 🧠 Concept

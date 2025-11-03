@@ -1,3 +1,8 @@
+---
+title: Developer Documentation
+description: Welcome to the Kanvas developer documentation
+---
+
 # 🧩 Kanvas — Developer Documentation
 
 Welcome to the **Kanvas** developer documentation.  
