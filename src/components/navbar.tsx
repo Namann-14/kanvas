@@ -1,53 +1,59 @@
-'use client'
+"use client";
 
-import React from 'react'
-import Link from 'next/link'
-import { Menu, X } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { cn } from '@/lib/utils'
-import { Logo } from './logo'
+import React from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 const menuItems = [
-  { name: 'Features', href: '#link' },
-  { name: 'Solution', href: '#link' },
-  { name: 'Pricing', href: '#link' },
-  { name: 'About', href: '#link' },
-]
+  { name: "Features", href: "#link" },
+  { name: "Solution", href: "#link" },
+  { name: "Pricing", href: "#link" },
+  { name: "About", href: "#link" },
+];
 
 export function Navbar() {
-  const [menuState, setMenuState] = React.useState(false)
-  const [isScrolled, setIsScrolled] = React.useState(false)
+  const [menuState, setMenuState] = React.useState(false);
+  const [isScrolled, setIsScrolled] = React.useState(false);
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <header>
       <nav
-        data-state={menuState && 'active'}
-        className="fixed z-20 w-full px-2 group">
+        data-state={menuState && "active"}
+        className="fixed z-20 w-full px-2 group"
+      >
         <div
           className={cn(
-            'mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12',
+            "mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 lg:px-12",
             isScrolled &&
-              'bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5'
-          )}>
+              "bg-background/50 max-w-4xl rounded-2xl border backdrop-blur-lg lg:px-5",
+          )}
+        >
           <div className="relative flex flex-wrap items-center justify-between gap-6 py-3 lg:gap-0 lg:py-4">
             <div className="flex w-full justify-between lg:w-auto">
-              <Link href="/" aria-label="home" className="flex items-center space-x-2">
+              <Link
+                href="/"
+                aria-label="home"
+                className="flex items-center space-x-2"
+              >
                 {/* <Logo /> */}
                 Kanvas
               </Link>
 
               <button
                 onClick={() => setMenuState(!menuState)}
-                aria-label={menuState == true ? 'Close Menu' : 'Open Menu'}
-                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden">
+                aria-label={menuState == true ? "Close Menu" : "Open Menu"}
+                className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
+              >
                 <Menu className="in-data-[state=active]:rotate-180 group-data-[state=active]:scale-0 group-data-[state=active]:opacity-0 m-auto size-6 duration-200" />
                 <X className="group-data-[state=active]:rotate-0 group-data-[state=active]:scale-100 group-data-[state=active]:opacity-100 absolute inset-0 m-auto size-6 -rotate-180 scale-0 opacity-0 duration-200" />
               </button>
@@ -59,7 +65,8 @@ export function Navbar() {
                   <li key={index}>
                     <Link
                       href={item.href}
-                      className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                      className="text-muted-foreground hover:text-accent-foreground block duration-150"
+                    >
                       <span>{item.name}</span>
                     </Link>
                   </li>
@@ -74,7 +81,8 @@ export function Navbar() {
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="text-muted-foreground hover:text-accent-foreground block duration-150">
+                        className="text-muted-foreground hover:text-accent-foreground block duration-150"
+                      >
                         <span>{item.name}</span>
                       </Link>
                     </li>
@@ -86,12 +94,17 @@ export function Navbar() {
                   asChild
                   variant="outline"
                   size="sm"
-                  className={cn(isScrolled && 'lg:hidden')}>
+                  className={cn(isScrolled && "lg:hidden")}
+                >
                   <Link href="#">
                     <span>Login</span>
                   </Link>
                 </Button>
-                <Button asChild size="sm" className={cn(isScrolled && 'lg:hidden')}>
+                <Button
+                  asChild
+                  size="sm"
+                  className={cn(isScrolled && "lg:hidden")}
+                >
                   <Link href="#">
                     <span>Sign Up</span>
                   </Link>
@@ -99,7 +112,8 @@ export function Navbar() {
                 <Button
                   asChild
                   size="sm"
-                  className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
+                  className={cn(isScrolled ? "lg:inline-flex" : "hidden")}
+                >
                   <Link href="#">
                     <span>Get Started</span>
                   </Link>
@@ -110,5 +124,5 @@ export function Navbar() {
         </div>
       </nav>
     </header>
-  )
+  );
 }
