@@ -188,3 +188,13 @@
     letter-spacing: var(--tracking-normal);
   }
 }
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar (Firefox, Edge) */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
