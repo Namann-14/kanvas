@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { getCallbackURL } from "@/lib/shared";
+import { LoaderFive } from "@/components/ui/loader";
 
 export function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -31,6 +32,7 @@ export function SignUp() {
   const router = useRouter();
   const params = useSearchParams();
   const [loading, startTransition] = useTransition();
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -46,159 +48,168 @@ export function SignUp() {
   };
 
   return (
-    <Card className="z-50 rounded-md rounded-t-none max-w-md">
-      <CardHeader>
-        <CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
-        <CardDescription className="text-xs md:text-sm">
-          Enter your information to create an account
-        </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <div className="grid gap-4">
-          <div className="grid grid-cols-2 gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="first-name">First name</Label>
-              <Input
-                id="first-name"
-                placeholder="Max"
-                required
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                }}
-                value={firstName}
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="last-name">Last name</Label>
-              <Input
-                id="last-name"
-                placeholder="Robinson"
-                required
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                }}
-                value={lastName}
-              />
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              value={email}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              autoComplete="new-password"
-              placeholder="Password"
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="password">Confirm Password</Label>
-            <Input
-              id="password_confirmation"
-              type="password"
-              value={passwordConfirmation}
-              onChange={(e) => setPasswordConfirmation(e.target.value)}
-              autoComplete="new-password"
-              placeholder="Confirm Password"
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="image">Profile Image (optional)</Label>
-            <div className="flex items-end gap-4">
-              {imagePreview && (
-                <div className="relative w-16 h-16 rounded-sm overflow-hidden">
-                  <Image
-                    src={imagePreview}
-                    alt="Profile preview"
-                    className="object-cover"
-                    fill
-                  />
-                </div>
-              )}
-              <div className="flex items-center gap-2 w-full">
+    <>
+      {isAuthenticating && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+          <LoaderFive text="Creating your account..." />
+        </div>
+      )}
+      <Card className="z-50 rounded-md rounded-t-none max-w-md">
+        <CardHeader>
+          <CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
+          <CardDescription className="text-xs md:text-sm">
+            Enter your information to create an account
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="first-name">First name</Label>
                 <Input
-                  id="image"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                  className="w-full"
+                  id="first-name"
+                  placeholder="Max"
+                  required
+                  onChange={(e) => {
+                    setFirstName(e.target.value);
+                  }}
+                  value={firstName}
                 />
-                {imagePreview && (
-                  <X
-                    className="cursor-pointer"
-                    onClick={() => {
-                      setImage(null);
-                      setImagePreview(null);
-                    }}
-                  />
-                )}
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="last-name">Last name</Label>
+                <Input
+                  id="last-name"
+                  placeholder="Robinson"
+                  required
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                  }}
+                  value={lastName}
+                />
               </div>
             </div>
-          </div>
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={loading}
-            onClick={async () => {
-              startTransition(async () => {
-                await signUp.email({
-                  email,
-                  password,
-                  name: `${firstName} ${lastName}`,
-                  image: image ? await convertImageToBase64(image) : "",
-                  callbackURL: "/dashboard",
-                  fetchOptions: {
-                    onError: (ctx) => {
-                      toast.error(ctx.error.message);
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="m@example.com"
+                required
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                value={email}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                autoComplete="new-password"
+                placeholder="Password"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password">Confirm Password</Label>
+              <Input
+                id="password_confirmation"
+                type="password"
+                value={passwordConfirmation}
+                onChange={(e) => setPasswordConfirmation(e.target.value)}
+                autoComplete="new-password"
+                placeholder="Confirm Password"
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="image">Profile Image (optional)</Label>
+              <div className="flex items-end gap-4">
+                {imagePreview && (
+                  <div className="relative w-16 h-16 rounded-sm overflow-hidden">
+                    <Image
+                      src={imagePreview}
+                      alt="Profile preview"
+                      className="object-cover"
+                      fill
+                    />
+                  </div>
+                )}
+                <div className="flex items-center gap-2 w-full">
+                  <Input
+                    id="image"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="w-full"
+                  />
+                  {imagePreview && (
+                    <X
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setImage(null);
+                        setImagePreview(null);
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={loading}
+              onClick={async () => {
+                startTransition(async () => {
+                  setIsAuthenticating(true);
+                  await signUp.email({
+                    email,
+                    password,
+                    name: `${firstName} ${lastName}`,
+                    image: image ? await convertImageToBase64(image) : "",
+                    callbackURL: "/dashboard",
+                    fetchOptions: {
+                      onError: (ctx) => {
+                        setIsAuthenticating(false);
+                        toast.error(ctx.error.message);
+                      },
+                      onSuccess: async () => {
+                        toast.success("Successfully signed up");
+                        router.push(getCallbackURL(params));
+                      },
                     },
-                    onSuccess: async () => {
-                      toast.success("Successfully signed up");
-                      router.push(getCallbackURL(params));
-                    },
-                  },
+                  });
                 });
-              });
-            }}
-          >
-            {loading ? (
-              <Loader2 size={16} className="animate-spin" />
-            ) : (
-              "Create an account"
-            )}
-          </Button>
-        </div>
-      </CardContent>
-      <CardFooter>
-        <div className="flex justify-center w-full border-t pt-4">
-          <p className="text-center text-xs text-neutral-500">
-            built with{" "}
-            <Link
-              href="https://better-auth.com"
-              className="underline"
-              target="_blank"
+              }}
             >
-              <span className="dark:text-white/70 cursor-pointer">
-                better-auth.
-              </span>
-            </Link>
-          </p>
-        </div>
-      </CardFooter>
-    </Card>
+              {loading ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                "Create an account"
+              )}
+            </Button>
+          </div>
+        </CardContent>
+        <CardFooter>
+          <div className="flex justify-center w-full border-t pt-4">
+            <p className="text-center text-xs text-neutral-500">
+              built with{" "}
+              <Link
+                href="https://better-auth.com"
+                className="underline"
+                target="_blank"
+              >
+                <span className="dark:text-white/70 cursor-pointer">
+                  better-auth.
+                </span>
+              </Link>
+            </p>
+          </div>
+        </CardFooter>
+      </Card>
+    </>
   );
 }
 
