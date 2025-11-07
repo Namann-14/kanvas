@@ -50,11 +50,11 @@ export function SignUp() {
   return (
     <>
       {isAuthenticating && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+        <div className="bg-background/80 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
           <LoaderFive text="Creating your account..." />
         </div>
       )}
-      <Card className="z-50 rounded-md rounded-t-none max-w-md">
+      <Card className="z-50 max-w-md rounded-md rounded-t-none">
         <CardHeader>
           <CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
           <CardDescription className="text-xs md:text-sm">
@@ -128,7 +128,7 @@ export function SignUp() {
               <Label htmlFor="image">Profile Image (optional)</Label>
               <div className="flex items-end gap-4">
                 {imagePreview && (
-                  <div className="relative w-16 h-16 rounded-sm overflow-hidden">
+                  <div className="relative h-16 w-16 overflow-hidden rounded-sm">
                     <Image
                       src={imagePreview}
                       alt="Profile preview"
@@ -137,7 +137,7 @@ export function SignUp() {
                     />
                   </div>
                 )}
-                <div className="flex items-center gap-2 w-full">
+                <div className="flex w-full items-center gap-2">
                   <Input
                     id="image"
                     type="file"
@@ -193,7 +193,7 @@ export function SignUp() {
           </div>
         </CardContent>
         <CardFooter>
-          <div className="flex justify-center w-full border-t pt-4">
+          <div className="flex w-full justify-center border-t pt-4">
             <p className="text-center text-xs text-neutral-500">
               built with{" "}
               <Link
@@ -201,7 +201,7 @@ export function SignUp() {
                 className="underline"
                 target="_blank"
               >
-                <span className="dark:text-white/70 cursor-pointer">
+                <span className="cursor-pointer dark:text-white/70">
                   better-auth.
                 </span>
               </Link>

@@ -25,7 +25,7 @@ import { LoaderFive } from "@/components/ui/loader";
 
 // Component must be declared outside of any render function
 const LastUsedIndicator = () => (
-  <span className="ml-auto absolute top-0 right-0 px-2 py-1 text-xs bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300 rounded-md font-medium">
+  <span className="absolute top-0 right-0 ml-auto rounded-md bg-blue-100 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900 dark:text-blue-300">
     Last Used
   </span>
 );
@@ -42,7 +42,7 @@ export default function SignIn() {
   return (
     <>
       {isAuthenticating && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+        <div className="bg-background/80 fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
           <LoaderFive text="Signing you in..." />
         </div>
       )}
@@ -102,7 +102,7 @@ export default function SignIn() {
 
             <Button
               type="submit"
-              className="w-full flex items-center justify-center"
+              className="flex w-full items-center justify-center"
               disabled={loading}
               onClick={async () => {
                 startTransition(async () => {
@@ -123,7 +123,7 @@ export default function SignIn() {
                 });
               }}
             >
-              <div className="flex items-center justify-center w-full relative">
+              <div className="relative flex w-full items-center justify-center">
                 {loading ? (
                   <Loader2 size={16} className="animate-spin" />
                 ) : (
@@ -135,13 +135,13 @@ export default function SignIn() {
 
             <div
               className={cn(
-                "w-full gap-2 flex items-center",
-                "justify-between flex-col",
+                "flex w-full items-center gap-2",
+                "flex-col justify-between",
               )}
             >
               <Button
                 variant="outline"
-                className={cn("w-full gap-2 flex relative")}
+                className={cn("relative flex w-full gap-2")}
                 onClick={async () => {
                   try {
                     setIsAuthenticating(true);
@@ -187,7 +187,7 @@ export default function SignIn() {
               </Button>
               <Button
                 variant="outline"
-                className={cn("w-full gap-2 flex items-center relative")}
+                className={cn("relative flex w-full items-center gap-2")}
                 onClick={async () => {
                   try {
                     setIsAuthenticating(true);
@@ -221,7 +221,7 @@ export default function SignIn() {
               </Button>
               <Button
                 variant="outline"
-                className={cn("w-full gap-2 flex items-center relative")}
+                className={cn("relative flex w-full items-center gap-2")}
                 onClick={async () => {
                   try {
                     setIsAuthenticating(true);
@@ -255,7 +255,7 @@ export default function SignIn() {
               </Button>
               <Button
                 variant="outline"
-                className={cn("w-full gap-2 flex items-center relative")}
+                className={cn("relative flex w-full items-center gap-2")}
                 onClick={async () => {
                   setIsAuthenticating(true);
                   await signIn.passkey({
@@ -284,7 +284,7 @@ export default function SignIn() {
           </div>
         </CardContent>
         <CardFooter>
-          <div className="flex justify-center w-full border-t pt-4">
+          <div className="flex w-full justify-center border-t pt-4">
             <p className="text-center text-xs text-neutral-500">
               built with{" "}
               <Link
@@ -292,7 +292,7 @@ export default function SignIn() {
                 className="underline"
                 target="_blank"
               >
-                <span className="dark:text-white/70 cursor-pointer">
+                <span className="cursor-pointer dark:text-white/70">
                   better-auth.
                 </span>
               </Link>

@@ -33,7 +33,7 @@ export function NavUser() {
   const { isMobile } = useSidebar();
   const { user, loading, signOut } = useAuth();
   const router = useRouter();
-
+  console.log(user);
   const getInitials = (name: string) => {
     return name
       .split(" ")

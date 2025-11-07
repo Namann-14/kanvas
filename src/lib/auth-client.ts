@@ -1,6 +1,5 @@
 import { createAuthClient } from "better-auth/react";
 import {
-  organizationClient,
   passkeyClient,
   twoFactorClient,
   adminClient,
@@ -15,7 +14,6 @@ import { toast } from "sonner";
 
 export const client = createAuthClient({
   plugins: [
-    organizationClient(),
     twoFactorClient({
       onTwoFactorRedirect() {
         window.location.href = "/two-factor";
@@ -27,9 +25,7 @@ export const client = createAuthClient({
     oneTapClient({
       clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID!,
       context: "signin",
-      promptOptions: {
-        maxAttempts: 5,
-      },
+      promptOptions: { maxAttempts: 5 },
     }),
     oidcClient(),
     genericOAuthClient(),
@@ -45,14 +41,4 @@ export const client = createAuthClient({
   },
 });
 
-export const {
-  signUp,
-  signIn,
-  signOut,
-  useSession,
-  organization,
-  useListOrganizations,
-  useActiveOrganization,
-  useActiveMember,
-  useActiveMemberRole,
-} = client;
+export const { signUp, signIn, signOut, useSession } = client;

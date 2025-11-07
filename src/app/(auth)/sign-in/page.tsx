@@ -41,7 +41,7 @@ export default function Page() {
 
   return (
     <div className="w-full space-y-6">
-      <div className="text-center space-y-2">
+      <div className="space-y-2 text-center">
         <h1 className="text-3xl font-bold">Welcome to Kanvas</h1>
         <p className="text-muted-foreground">
           Sign in to your account or create a new one

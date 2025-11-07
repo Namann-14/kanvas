@@ -34,11 +34,11 @@ export function HeroSection() {
       <main className="overflow-hidden">
         <div
           aria-hidden
-          className="z-2 absolute inset-0 pointer-events-none isolate opacity-50 contain-strict hidden lg:block"
+          className="pointer-events-none absolute inset-0 isolate z-2 hidden opacity-50 contain-strict lg:block"
         >
-          <div className="w-140 h-320 -translate-y-[350px] absolute left-0 top-0 -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
-          <div className="h-320 absolute left-0 top-0 w-56 -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)] [translate:5%_-50%]" />
-          <div className="h-320 -translate-y-[350px] absolute left-0 top-0 w-56 -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
+          <div className="absolute top-0 left-0 h-320 w-140 -translate-y-[350px] -rotate-45 rounded-full bg-[radial-gradient(68.54%_68.72%_at_55.02%_31.46%,hsla(0,0%,85%,.08)_0,hsla(0,0%,55%,.02)_50%,hsla(0,0%,45%,0)_80%)]" />
+          <div className="absolute top-0 left-0 h-320 w-56 [translate:5%_-50%] -rotate-45 rounded-full bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.06)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
+          <div className="absolute top-0 left-0 h-320 w-56 -translate-y-[350px] -rotate-45 bg-[radial-gradient(50%_50%_at_50%_50%,hsla(0,0%,85%,.04)_0,hsla(0,0%,45%,.02)_80%,transparent_100%)]" />
         </div>
         <section>
           <div className="relative pt-24 md:pt-36">
@@ -82,7 +82,7 @@ export function HeroSection() {
               className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--background)_75%)]"
             />
             <div className="mx-auto max-w-7xl px-6">
-              <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
+              <div className="text-center sm:mx-auto lg:mt-0 lg:mr-auto">
                 <AnimatedGroup variants={transitionVariants}>
                   <Link
                     href="#link"
@@ -105,10 +105,10 @@ export function HeroSection() {
                     </div>
                   </Link>
 
-                  <h1 className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem]">
+                  <h1 className="mx-auto mt-8 max-w-4xl text-6xl text-balance md:text-7xl lg:mt-16 xl:text-[5.25rem]">
                     Organize Work. Collaborate Better.
                   </h1>
-                  <p className="mx-auto mt-8 max-w-2xl text-balance text-lg">
+                  <p className="mx-auto mt-8 max-w-2xl text-lg text-balance">
                     Transform the way you work with Kanvas — a powerful
                     workspace that brings together Kanban boards, task
                     management, and collaborative notes in one beautiful,
@@ -172,21 +172,21 @@ export function HeroSection() {
                 ...transitionVariants,
               }}
             >
-              <div className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
+              <div className="relative mt-8 -mr-56 overflow-hidden px-2 sm:mt-12 sm:mr-0 md:mt-20">
                 <div
                   aria-hidden
-                  className="bg-linear-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
+                  className="to-background absolute inset-0 z-10 bg-linear-to-b from-transparent from-35%"
                 />
-                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
+                <div className="ring-background bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-4 shadow-lg ring-1 inset-shadow-2xs shadow-zinc-950/15 dark:inset-shadow-white/20">
                   <Image
-                    className="bg-background aspect-15/8 relative hidden rounded-2xl dark:block"
+                    className="bg-background relative hidden aspect-15/8 rounded-2xl dark:block"
                     src="https://tailark.com//_next/image?url=%2Fmail2.png&w=3840&q=75"
                     alt="app screen"
                     width="2700"
                     height="1440"
                   />
                   <Image
-                    className="z-2 border-border/25 aspect-15/8 relative rounded-2xl border dark:hidden"
+                    className="border-border/25 relative z-2 aspect-15/8 rounded-2xl border dark:hidden"
                     src="https://tailark.com/_next/image?url=%2Fmail2-light.png&w=3840&q=75"
                     alt="app screen"
                     width="2700"
@@ -197,10 +197,10 @@ export function HeroSection() {
             </AnimatedGroup>
           </div>
         </section>
-        <section className="bg-background pb-16 pt-16 md:pb-32">
+        <section className="bg-background pt-16 pb-16 md:pb-32">
           <div className="group relative m-auto max-w-5xl px-6">
-            <div className="text-center mb-12">
-              <h2 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            <div className="mb-12 text-center">
+              <h2 className="text-muted-foreground text-sm font-semibold tracking-wider uppercase">
                 Powered by Modern Technologies
               </h2>
             </div>
@@ -213,7 +213,7 @@ export function HeroSection() {
                   height="20"
                   width={100}
                 />
-                <span className="text-xs text-muted-foreground">Next.js</span>
+                <span className="text-muted-foreground text-xs">Next.js</span>
               </div>
 
               <div className="flex flex-col items-center gap-2">
@@ -224,7 +224,7 @@ export function HeroSection() {
                   height="16"
                   width={80}
                 />
-                <span className="text-xs text-muted-foreground">Prisma</span>
+                <span className="text-muted-foreground text-xs">Prisma</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <Image
@@ -234,7 +234,7 @@ export function HeroSection() {
                   height="16"
                   width={80}
                 />
-                <span className="text-xs text-muted-foreground">Redux</span>
+                <span className="text-muted-foreground text-xs">Redux</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <Image
@@ -244,7 +244,7 @@ export function HeroSection() {
                   height="20"
                   width={100}
                 />
-                <span className="text-xs text-muted-foreground">Supabase</span>
+                <span className="text-muted-foreground text-xs">Supabase</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <Image
@@ -254,7 +254,7 @@ export function HeroSection() {
                   height="20"
                   width={100}
                 />
-                <span className="text-xs text-muted-foreground">Redis</span>
+                <span className="text-muted-foreground text-xs">Redis</span>
               </div>
               <div className="flex flex-col items-center gap-2">
                 <Image
@@ -264,7 +264,7 @@ export function HeroSection() {
                   height="16"
                   width={80}
                 />
-                <span className="text-xs text-muted-foreground">
+                <span className="text-muted-foreground text-xs">
                   TypeScript
                 </span>
               </div>
@@ -276,7 +276,7 @@ export function HeroSection() {
                   height="28"
                   width={120}
                 />
-                <span className="text-xs text-muted-foreground">Tailwind</span>
+                <span className="text-muted-foreground text-xs">Tailwind</span>
               </div>
 
               <div className="flex flex-col items-center gap-2">
@@ -287,7 +287,7 @@ export function HeroSection() {
                   height="24"
                   width={100}
                 />
-                <span className="text-xs text-muted-foreground">Vercel</span>
+                <span className="text-muted-foreground text-xs">Vercel</span>
               </div>
             </div>
           </div>

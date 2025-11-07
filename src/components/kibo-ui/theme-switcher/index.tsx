@@ -65,7 +65,7 @@ export const ThemeSwitcher = ({
   return (
     <div
       className={cn(
-        "relative isolate flex h-8 rounded-full bg-background p-1 ring-1 ring-border",
+        "bg-background ring-border relative isolate flex h-8 rounded-full p-1 ring-1",
         className,
       )}
     >
@@ -82,7 +82,7 @@ export const ThemeSwitcher = ({
           >
             {isActive && (
               <motion.div
-                className="absolute inset-0 rounded-full bg-secondary"
+                className="bg-secondary absolute inset-0 rounded-full"
                 layoutId="activeTheme"
                 transition={{ type: "spring", duration: 0.5 }}
               />

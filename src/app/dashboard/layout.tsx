@@ -34,7 +34,7 @@ export default function DashboardLayout({
         <header
           className={cn(
             "flex h-16 shrink-0 items-center justify-between gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12",
-            "border-b border-border bg-background/75 backdrop-blur-sm",
+            "border-border bg-background/75 border-b backdrop-blur-sm",
             "sticky top-0 z-10",
           )}
         >

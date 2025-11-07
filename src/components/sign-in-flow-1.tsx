@@ -50,7 +50,7 @@ export const CanvasRevealEffect = ({
   reverse?: boolean; // This prop determines the direction
 }) => {
   return (
-    <div className={cn("h-full relative w-full", containerClassName)}>
+    <div className={cn("relative h-full w-full", containerClassName)}>
       {" "}
       {/* Removed bg-white */}
       <div className="h-full w-full">
@@ -351,7 +351,7 @@ const ShaderMaterial = ({
 
 const Shader: React.FC<ShaderProps> = ({ source, uniforms, maxFps = 60 }) => {
   return (
-    <Canvas className="absolute inset-0  h-full w-full">
+    <Canvas className="absolute inset-0 h-full w-full">
       <ShaderMaterial source={source} uniforms={uniforms} maxFps={maxFps} />
     </Canvas>
   );
@@ -446,7 +446,7 @@ export const SignInPage = ({ className }: SignInPageProps) => {
   return (
     <div
       className={cn(
-        "flex w-full flex-col min-h-screen bg-black relative",
+        "relative flex min-h-screen w-full flex-col bg-black",
         className,
       )}
     >
@@ -484,16 +484,16 @@ export const SignInPage = ({ className }: SignInPageProps) => {
         )}
 
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(0,0,0,1)_0%,transparent_100%)]" />
-        <div className="absolute top-0 left-0 right-0 h-1/3 bg-linear-to-b from-black to-transparent" />
+        <div className="absolute top-0 right-0 left-0 h-1/3 bg-linear-to-b from-black to-transparent" />
       </div>
 
       {/* Content Layer */}
-      <div className="relative z-10 flex flex-col flex-1">
+      <div className="relative z-10 flex flex-1 flex-col">
         {/* Main content container */}
-        <div className="flex flex-1 flex-col lg:flex-row ">
+        <div className="flex flex-1 flex-col lg:flex-row">
           {/* Left side (form) */}
-          <div className="flex-1 flex flex-col justify-center items-center">
-            <div className="w-full   max-w-sm">
+          <div className="flex flex-1 flex-col items-center justify-center">
+            <div className="w-full max-w-sm">
               <AnimatePresence mode="wait">
                 {step === "email" ? (
                   <motion.div
@@ -505,10 +505,10 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                     className="space-y-6 text-center"
                   >
                     <div className="space-y-1">
-                      <h1 className="text-[2.5rem] font-bold leading-[1.1] tracking-tight text-white">
+                      <h1 className="text-[2.5rem] leading-[1.1] font-bold tracking-tight text-white">
                         Welcome Developer
                       </h1>
-                      <p className="text-[1.8rem] text-white/70 font-light">
+                      <p className="text-[1.8rem] font-light text-white/70">
                         Your sign in component
                       </p>
                     </div>
@@ -518,7 +518,7 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                         type="button"
                         onClick={handleGoogleSignIn}
                         disabled={loading}
-                        className="backdrop-blur-[2px] w-full flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-full py-3 px-4 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="flex w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-3 text-white backdrop-blur-[2px] transition-colors hover:bg-white/10 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -550,9 +550,9 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                       </button>
 
                       <div className="flex items-center gap-4">
-                        <div className="h-px bg-white/10 flex-1" />
-                        <span className="text-white/40 text-sm">or</span>
-                        <div className="h-px bg-white/10 flex-1" />
+                        <div className="h-px flex-1 bg-white/10" />
+                        <span className="text-sm text-white/40">or</span>
+                        <div className="h-px flex-1 bg-white/10" />
                       </div>
 
                       <form onSubmit={handleEmailSubmit}>
@@ -562,18 +562,18 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                             placeholder="info@gmail.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full backdrop-blur-[1px] text-white border border-white/10 rounded-full py-3 px-4 focus:outline-none focus:border focus:border-white/30 text-center"
+                            className="w-full rounded-full border border-white/10 px-4 py-3 text-center text-white backdrop-blur-[1px] focus:border focus:border-white/30 focus:outline-none"
                             required
                           />
                           <button
                             type="submit"
-                            className="absolute right-1.5 top-1.5 text-white w-9 h-9 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 transition-colors group overflow-hidden"
+                            className="group absolute top-1.5 right-1.5 flex h-9 w-9 items-center justify-center overflow-hidden rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
                           >
-                            <span className="relative w-full h-full block overflow-hidden">
+                            <span className="relative block h-full w-full overflow-hidden">
                               <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover:translate-x-full">
                                 →
                               </span>
-                              <span className="absolute inset-0 flex items-center justify-center transition-transform duration-300 -translate-x-full group-hover:translate-x-0">
+                              <span className="absolute inset-0 flex -translate-x-full items-center justify-center transition-transform duration-300 group-hover:translate-x-0">
                                 →
                               </span>
                             </span>
@@ -582,39 +582,39 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                       </form>
                     </div>
 
-                    <p className="text-xs text-white/40 pt-10">
+                    <p className="pt-10 text-xs text-white/40">
                       By signing up, you agree to the{" "}
                       <Link
                         href="#"
-                        className="underline text-white/40 hover:text-white/60 transition-colors"
+                        className="text-white/40 underline transition-colors hover:text-white/60"
                       >
                         MSA
                       </Link>
                       ,{" "}
                       <Link
                         href="#"
-                        className="underline text-white/40 hover:text-white/60 transition-colors"
+                        className="text-white/40 underline transition-colors hover:text-white/60"
                       >
                         Product Terms
                       </Link>
                       ,{" "}
                       <Link
                         href="#"
-                        className="underline text-white/40 hover:text-white/60 transition-colors"
+                        className="text-white/40 underline transition-colors hover:text-white/60"
                       >
                         Policies
                       </Link>
                       ,{" "}
                       <Link
                         href="#"
-                        className="underline text-white/40 hover:text-white/60 transition-colors"
+                        className="text-white/40 underline transition-colors hover:text-white/60"
                       >
                         Privacy Notice
                       </Link>
                       , and{" "}
                       <Link
                         href="#"
-                        className="underline text-white/40 hover:text-white/60 transition-colors"
+                        className="text-white/40 underline transition-colors hover:text-white/60"
                       >
                         Cookie Notice
                       </Link>
@@ -631,10 +631,10 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                     className="space-y-6 text-center"
                   >
                     <div className="space-y-1">
-                      <h1 className="text-[2.5rem] font-bold leading-[1.1] tracking-tight text-white">
+                      <h1 className="text-[2.5rem] leading-[1.1] font-bold tracking-tight text-white">
                         Enter your password
                       </h1>
-                      <p className="text-[1.25rem] text-white/50 font-light">
+                      <p className="text-[1.25rem] font-light text-white/50">
                         Sign in to continue
                       </p>
                     </div>
@@ -647,7 +647,7 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                           placeholder="Enter password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          className="w-full backdrop-blur-[1px] text-white border border-white/10 rounded-full py-3 px-4 focus:outline-none focus:border focus:border-white/30 text-center"
+                          className="w-full rounded-full border border-white/10 px-4 py-3 text-center text-white backdrop-blur-[1px] focus:border focus:border-white/30 focus:outline-none"
                           required
                           disabled={loading}
                         />
@@ -657,7 +657,7 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                         <motion.button
                           type="button"
                           onClick={handleBackClick}
-                          className="rounded-full bg-white text-black font-medium px-8 py-3 hover:bg-white/90 transition-colors w-[30%]"
+                          className="w-[30%] rounded-full bg-white px-8 py-3 font-medium text-black transition-colors hover:bg-white/90"
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           transition={{ duration: 0.2 }}
@@ -667,10 +667,10 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                         </motion.button>
                         <motion.button
                           type="submit"
-                          className={`flex-1 rounded-full font-medium py-3 border transition-all duration-300 ${
+                          className={`flex-1 rounded-full border py-3 font-medium transition-all duration-300 ${
                             password && !loading
-                              ? "bg-white text-black border-transparent hover:bg-white/90 cursor-pointer"
-                              : "bg-[#111] text-white/50 border-white/10 cursor-not-allowed"
+                              ? "cursor-pointer border-transparent bg-white text-black hover:bg-white/90"
+                              : "cursor-not-allowed border-white/10 bg-[#111] text-white/50"
                           }`}
                           disabled={!password || loading}
                           whileHover={
@@ -686,7 +686,7 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                     <div>
                       <Link
                         href="/forget-password"
-                        className="text-white/50 hover:text-white/70 transition-colors text-sm underline"
+                        className="text-sm text-white/50 underline transition-colors hover:text-white/70"
                       >
                         Forgot password?
                       </Link>
@@ -697,35 +697,35 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                         By signing in, you agree to the{" "}
                         <Link
                           href="#"
-                          className="underline text-white/40 hover:text-white/60 transition-colors"
+                          className="text-white/40 underline transition-colors hover:text-white/60"
                         >
                           MSA
                         </Link>
                         ,{" "}
                         <Link
                           href="#"
-                          className="underline text-white/40 hover:text-white/60 transition-colors"
+                          className="text-white/40 underline transition-colors hover:text-white/60"
                         >
                           Product Terms
                         </Link>
                         ,{" "}
                         <Link
                           href="#"
-                          className="underline text-white/40 hover:text-white/60 transition-colors"
+                          className="text-white/40 underline transition-colors hover:text-white/60"
                         >
                           Policies
                         </Link>
                         ,{" "}
                         <Link
                           href="#"
-                          className="underline text-white/40 hover:text-white/60 transition-colors"
+                          className="text-white/40 underline transition-colors hover:text-white/60"
                         >
                           Privacy Notice
                         </Link>
                         , and{" "}
                         <Link
                           href="#"
-                          className="underline text-white/40 hover:text-white/60 transition-colors"
+                          className="text-white/40 underline transition-colors hover:text-white/60"
                         >
                           Cookie Notice
                         </Link>
@@ -742,10 +742,10 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                     className="space-y-6 text-center"
                   >
                     <div className="space-y-1">
-                      <h1 className="text-[2.5rem] font-bold leading-[1.1] tracking-tight text-white">
+                      <h1 className="text-[2.5rem] leading-[1.1] font-bold tracking-tight text-white">
                         You&apos;re in!
                       </h1>
-                      <p className="text-[1.25rem] text-white/50 font-light">
+                      <p className="text-[1.25rem] font-light text-white/50">
                         Welcome
                       </p>
                     </div>
@@ -756,7 +756,7 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                       transition={{ duration: 0.5, delay: 0.5 }}
                       className="py-10"
                     >
-                      <div className="mx-auto w-16 h-16 rounded-full bg-linear-to-br from-white to-white/70 flex items-center justify-center">
+                      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-white to-white/70">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-8 w-8 text-black"
@@ -776,7 +776,7 @@ export const SignInPage = ({ className }: SignInPageProps) => {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       transition={{ delay: 1 }}
-                      className="w-full rounded-full bg-white text-black font-medium py-3 hover:bg-white/90 transition-colors"
+                      className="w-full rounded-full bg-white py-3 font-medium text-black transition-colors hover:bg-white/90"
                     >
                       Continue to Dashboard
                     </motion.button>
