@@ -1,4 +1,8 @@
 {
   "title": "Documentation",
-  "pages": ["index", "prd", "setup"]
+  "pages": ["index", "prd", "setup"],
+  "api": {
+    "title": "API Reference",
+    "pages": ["workspaces", "boards", "columns", "tasks"]
+  }
 }

@@ -1,0 +1,44 @@
+---
+title: Tasks
+description: API endpoints for managing tasks
+---
+
+## GET /api/tasks
+
+Get all tasks for a column.
+
+### Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| columnId | string | Yes | The column ID |
+
+### Response
+
+Returns an array of task objects.
+
+```json
+[
+  {
+    "id": "string",
+    "title": "string",
+    "description": "string",
+    "columnId": "string",
+    "order": 0,
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  }
+]
+```
+
+### Status Codes
+
+- `200` - Success
+- `401` - Unauthorized
+
+### Example
+
+```bash
+curl -X GET "http://localhost:3000/api/tasks?columnId=column-id" \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```

@@ -12,9 +12,14 @@ export async function getWorkspaceOrThrow(workspaceId: string) {
   const workspace = await db.workspace.findFirst({
     where: {
       id: workspaceId,
-      members: {
-        some: { userId: session.user.id },
-      },
+      OR: [
+        { ownerId: session.user.id },
+        {
+          members: {
+            some: { userId: session.user.id },
+          },
+        },
+      ],
     },
   });
 

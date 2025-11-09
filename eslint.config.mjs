@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Generated Fumadocs files:
     ".source/**",
+    // Generated Prisma files:
+    "src/generated/**",
   ]),
 ]);
 

@@ -1,0 +1,42 @@
+---
+title: Boards
+description: API endpoints for managing boards
+---
+
+## GET /api/boards
+
+Get all boards for a workspace.
+
+### Parameters
+
+| Name | Type | Required | Description |
+|------|------|----------|-------------|
+| workspaceId | string | Yes | The workspace ID |
+
+### Response
+
+Returns an array of board objects.
+
+```json
+[
+  {
+    "id": "string",
+    "name": "string",
+    "workspaceId": "string",
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "updatedAt": "2024-01-01T00:00:00.000Z"
+  }
+]
+```
+
+### Status Codes
+
+- `200` - Success
+- `401` - Unauthorized
+
+### Example
+
+```bash
+curl -X GET "http://localhost:3000/api/boards?workspaceId=workspace-id" \
+  -H "Authorization: Bearer YOUR_TOKEN"
+```
