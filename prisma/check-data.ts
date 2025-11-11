@@ -7,10 +7,10 @@ async function main() {
 
   const boards = await prisma.board.findMany({
     include: {
-      workspace: true,
-      columns: {
+      Workspace: true,
+      Column: {
         include: {
-          tasks: true,
+          Task: true,
         },
         orderBy: { position: "asc" },
       },
@@ -26,12 +26,12 @@ async function main() {
   boards.forEach((board) => {
     console.log(`\n🎯 Board: ${board.name}`);
     console.log(`   ID: ${board.id}`);
-    console.log(`   Workspace: ${board.workspace.name}`);
+    console.log(`   Workspace: ${board.Workspace.name}`);
     console.log(`   🔗 Access at: http://localhost:3000/board/${board.id}\n`);
 
-    board.columns.forEach((column) => {
-      console.log(`   📋 ${column.name} (${column.tasks.length} tasks)`);
-      column.tasks.forEach((task) => {
+    board.Column.forEach((column) => {
+      console.log(`   📋 ${column.name} (${column.Task.length} tasks)`);
+      column.Task.forEach((task) => {
         console.log(`      • ${task.title}`);
       });
     });

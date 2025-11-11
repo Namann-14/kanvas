@@ -11,12 +11,12 @@ export async function GET(req: Request) {
 
   await getWorkspaceOrThrow(workspaceId);
 
-  const boards = await db.board.findMany({
+  // Get the single board for this workspace
+  const board = await db.board.findUnique({
     where: { workspaceId },
-    orderBy: { createdAt: "asc" },
   });
 
-  return NextResponse.json(boards);
+  return NextResponse.json(board);
 }
 
 export async function POST(req: Request) {
@@ -24,11 +24,39 @@ export async function POST(req: Request) {
 
   await getWorkspaceOrThrow(workspaceId);
 
+  // Check if board already exists for this workspace
+  const existingBoard = await db.board.findUnique({
+    where: { workspaceId },
+  });
+
+  if (existingBoard) {
+    return new NextResponse("Board already exists for this workspace", {
+      status: 400,
+    });
+  }
+
+  // Generate a unique ID for the board
+  const boardId = `board-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
   const board = await db.board.create({
     data: {
+      id: boardId,
       name,
       workspaceId,
     },
+  });
+
+  return NextResponse.json(board);
+}
+
+export async function PATCH(req: Request) {
+  const { name, workspaceId } = await req.json();
+
+  await getWorkspaceOrThrow(workspaceId);
+
+  const board = await db.board.update({
+    where: { workspaceId },
+    data: { name },
   });
 
   return NextResponse.json(board);

@@ -151,11 +151,30 @@ const data = {
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+type Workspace = {
+  id: string;
+  name: string;
+  ownerId: string;
+  role?: string;
+};
+
+export function AppSidebar({
+  workspaces = [],
+  currentWorkspaceId,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & {
+  workspaces?: Workspace[];
+  currentWorkspaceId?: string | null;
+}) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        {workspaces.length > 0 && currentWorkspaceId ? (
+          <TeamSwitcher
+            workspaces={workspaces}
+            currentWorkspaceId={currentWorkspaceId}
+          />
+        ) : null}
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />

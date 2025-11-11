@@ -1,0 +1,49 @@
+import db from "@/lib/db";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+
+export async function getUserWorkspaces() {
+  try {
+    const session = await auth.api.getSession({ headers: await headers() });
+
+    if (!session?.user) {
+      return [];
+    }
+
+    const workspaces = await db.workspace.findMany({
+      where: {
+        OR: [
+          { ownerId: session.user.id },
+          {
+            WorkspaceMember: {
+              some: { userId: session.user.id },
+            },
+          },
+        ],
+      },
+      include: {
+        WorkspaceMember: {
+          where: { userId: session.user.id },
+          select: { role: true },
+        },
+      },
+      orderBy: {
+        createdAt: "asc",
+      },
+    });
+
+    return workspaces.map((workspace) => ({
+      id: workspace.id,
+      name: workspace.name,
+      ownerId: workspace.ownerId,
+      role:
+        workspace.WorkspaceMember[0]?.role ||
+        (workspace.ownerId === session.user.id ? "owner" : "member"),
+    }));
+  } catch (error) {
+    console.error("Error fetching user workspaces:", error);
+    // Return empty array if database is unavailable
+    // This prevents the app from crashing
+    return [];
+  }
+}

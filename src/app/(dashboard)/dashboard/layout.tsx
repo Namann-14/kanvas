@@ -16,20 +16,28 @@ import {
 import { Separator } from "@radix-ui/react-separator";
 import { ThemeSwitcher } from "@/components/kibo-ui/theme-switcher";
 import { cn } from "@/lib/utils";
+import { getUserWorkspaces } from "@/lib/queries/get-workspaces";
+import { getCurrentWorkspace } from "@/lib/actions/workspace-actions";
 
 export const metadata: Metadata = {
   title: "Dashboard - kanvas",
   description: "A simple note-taking app built with Next.js and Prisma.",
 };
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const workspaces = await getUserWorkspaces();
+  const currentWorkspaceId = await getCurrentWorkspace();
+
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar
+        workspaces={workspaces}
+        currentWorkspaceId={currentWorkspaceId}
+      />
       <SidebarInset>
         <header
           className={cn(

@@ -47,6 +47,7 @@ async function main() {
       role: "owner",
     },
     create: {
+      id: `${realUser.id}-${workspace.id}`,
       userId: realUser.id,
       workspaceId: workspace.id,
       role: "owner",

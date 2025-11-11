@@ -7,12 +7,12 @@ async function main() {
 
   const users = await prisma.user.findMany({
     include: {
-      memberships: {
+      WorkspaceMember: {
         include: {
-          workspace: true,
+          Workspace: true,
         },
       },
-      workspaces: true,
+      Workspace: true,
     },
   });
 
@@ -26,17 +26,17 @@ async function main() {
     console.log(`   ID: ${user.id}`);
     console.log(`   Name: ${user.name || "(no name)"}`);
 
-    if (user.workspaces.length > 0) {
+    if (user.Workspace.length > 0) {
       console.log(`   \n   Owned Workspaces:`);
-      user.workspaces.forEach((ws) => {
+      user.Workspace.forEach((ws) => {
         console.log(`     • ${ws.name} (${ws.id})`);
       });
     }
 
-    if (user.memberships.length > 0) {
+    if (user.WorkspaceMember.length > 0) {
       console.log(`   \n   Member of Workspaces:`);
-      user.memberships.forEach((m) => {
-        console.log(`     • ${m.workspace.name} (${m.role})`);
+      user.WorkspaceMember.forEach((m) => {
+        console.log(`     • ${m.Workspace.name} (${m.role})`);
       });
     }
   });

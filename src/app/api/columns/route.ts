@@ -8,8 +8,15 @@ export async function POST(req: Request) {
 
   const position = await db.column.count({ where: { boardId } });
 
+  const columnId = `col-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+
   const column = await db.column.create({
-    data: { name, boardId, position },
+    data: {
+      id: columnId,
+      name,
+      boardId,
+      position,
+    },
   });
 
   return NextResponse.json(column);

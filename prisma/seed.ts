@@ -16,6 +16,7 @@ async function main() {
     // Create a test user only if no users exist
     user = await prisma.user.create({
       data: {
+        id: "seed-user-1",
         email: "test@example.com",
         name: "Test User",
         emailVerified: true,
@@ -33,12 +34,6 @@ async function main() {
       id: "seed-workspace-1",
       name: "My First Workspace",
       ownerId: user.id,
-      members: {
-        create: {
-          userId: user.id,
-          role: "owner",
-        },
-      },
     },
   });
 
@@ -54,6 +49,7 @@ async function main() {
     },
     update: {},
     create: {
+      id: "seed-workspace-member-1",
       userId: user.id,
       workspaceId: workspace.id,
       role: "owner",
@@ -62,18 +58,18 @@ async function main() {
 
   console.log("✅ Added owner as workspace member");
 
-  // Create a board
+  // Create a board (one per workspace)
   const board = await prisma.board.upsert({
-    where: { id: "seed-board-1" },
+    where: { workspaceId: workspace.id },
     update: {},
     create: {
       id: "seed-board-1",
-      name: "Project Management Board",
+      name: workspace.name, // Board name matches workspace name
       workspaceId: workspace.id,
     },
   });
 
-  console.log("✅ Created board:", board.name);
+  console.log("✅ Created board for workspace:", board.name);
 
   // Create columns
   const columns = [
@@ -166,8 +162,9 @@ async function main() {
   }
 
   console.log("\n🎉 Seeding completed!");
-  console.log(`\n📋 Your board ID: ${board.id}`);
-  console.log(`🔗 Access it at: /board/${board.id}`);
+  console.log(`\n📋 Workspace: ${workspace.name}`);
+  console.log(`📋 Board: ${board.name}`);
+  console.log(`🔗 Access it at: /dashboard`);
 }
 
 main()
