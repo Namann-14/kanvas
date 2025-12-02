@@ -16,7 +16,7 @@ A full-stack, production-ready productivity platform featuring real-time Kanban 
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
 
-[🚀 Live Demo](#-demo--live-link) · [📸 Screenshots](#-screenshots) · [🛠 Installation](#-installation--setup) · [🤝 Contributing](#-contributing)
+[🚀 Live Demo](#-demo--live-link) · [🛠 Installation](#-installation--setup) · [🤝 Contributing](#-contributing)
 
 </div>
 
@@ -29,11 +29,10 @@ A full-stack, production-ready productivity platform featuring real-time Kanban 
 
 ---
 
-## 📸 Screenshots
 
 <div align="center">
 
-![Landing Page](https://via.placeholder.com/800x450/1a1a2e/ffffff?text=Landing+Page)
+<img width="1269" height="669" alt="kanvas landing page" src="https://github.com/user-attachments/assets/6fdfcfd6-a31c-4510-80e8-44dc67b70897" />
 
 </div>
 
