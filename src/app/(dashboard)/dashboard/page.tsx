@@ -1,12 +1,57 @@
-﻿import { getWorkspaceBoard } from "@/lib/queries/get-workspace-board";
+﻿import { Suspense } from "react";
+import { getWorkspaceBoard } from "@/lib/queries/get-workspace-board";
 import { getCurrentWorkspace } from "@/lib/actions/workspace-actions";
 import { KanbanProvider } from "@/contexts/kanban-context";
 import { KanbanBoardView } from "@/components/dashboard/kanban-board-view";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Loader2 } from "lucide-react";
 
-export default async function DashboardPage() {
+function KanbanBoardSkeleton() {
+  return (
+    <div className="flex h-full flex-col gap-4 p-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <Skeleton className="mb-2 h-8 w-48" />
+          <Skeleton className="h-4 w-64" />
+        </div>
+        <div className="flex items-center gap-2">
+          <Skeleton className="h-9 w-24" />
+          <Skeleton className="h-9 w-32" />
+        </div>
+      </div>
+      <div className="grid flex-1 grid-cols-4 gap-4">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="rounded-lg border p-4">
+            <Skeleton className="mb-4 h-6 w-24" />
+            <div className="space-y-3">
+              <Skeleton className="h-20 w-full" />
+              <Skeleton className="h-20 w-full" />
+              <Skeleton className="h-20 w-full" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function LoadingBoard() {
+  return (
+    <div className="flex h-full items-center justify-center">
+      <div className="text-center">
+        <Loader2 className="text-primary mx-auto mb-4 h-8 w-8 animate-spin" />
+        <p className="text-muted-foreground">Loading your board...</p>
+      </div>
+    </div>
+  );
+}
+
+async function KanbanBoardContent() {
   const currentWorkspaceId = await getCurrentWorkspace();
+  console.log("🔍 Current Workspace ID:", currentWorkspaceId);
 
   if (!currentWorkspaceId) {
+    console.log("⚠️ No workspace ID found in cookie");
     return (
       <div className="flex h-full items-center justify-center p-8">
         <div className="text-center">
@@ -20,6 +65,12 @@ export default async function DashboardPage() {
   }
 
   const board = await getWorkspaceBoard(currentWorkspaceId);
+  console.log(
+    "📋 Board data:",
+    board
+      ? { id: board.id, name: board.name, columnsCount: board.Column.length }
+      : null,
+  );
 
   if (!board) {
     return (
@@ -63,5 +114,13 @@ export default async function DashboardPage() {
     >
       <KanbanBoardView />
     </KanbanProvider>
+  );
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<KanbanBoardSkeleton />}>
+      <KanbanBoardContent />
+    </Suspense>
   );
 }

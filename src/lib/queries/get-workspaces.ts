@@ -7,8 +7,11 @@ export async function getUserWorkspaces() {
     const session = await auth.api.getSession({ headers: await headers() });
 
     if (!session?.user) {
+      console.log("⚠️ No session in getUserWorkspaces");
       return [];
     }
+
+    console.log("🔍 Fetching workspaces for user:", session.user.id);
 
     const workspaces = await db.workspace.findMany({
       where: {
@@ -32,7 +35,7 @@ export async function getUserWorkspaces() {
       },
     });
 
-    return workspaces.map((workspace) => ({
+    const mappedWorkspaces = workspaces.map((workspace) => ({
       id: workspace.id,
       name: workspace.name,
       ownerId: workspace.ownerId,
@@ -40,6 +43,13 @@ export async function getUserWorkspaces() {
         workspace.WorkspaceMember[0]?.role ||
         (workspace.ownerId === session.user.id ? "owner" : "member"),
     }));
+
+    console.log(
+      `✅ Found ${mappedWorkspaces.length} workspaces:`,
+      mappedWorkspaces.map((w) => ({ id: w.id, name: w.name })),
+    );
+
+    return mappedWorkspaces;
   } catch (error) {
     console.error("Error fetching user workspaces:", error);
     // Return empty array if database is unavailable

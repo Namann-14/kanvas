@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import {
   SidebarInset,
   SidebarProvider,
@@ -18,26 +19,48 @@ import { ThemeSwitcher } from "@/components/kibo-ui/theme-switcher";
 import { cn } from "@/lib/utils";
 import { getUserWorkspaces } from "@/lib/queries/get-workspaces";
 import { getCurrentWorkspace } from "@/lib/actions/workspace-actions";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const metadata: Metadata = {
   title: "Dashboard - kanvas",
   description: "A simple note-taking app built with Next.js and Prisma.",
 };
 
-export default async function DashboardLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+async function SidebarContent() {
   const workspaces = await getUserWorkspaces();
   const currentWorkspaceId = await getCurrentWorkspace();
 
   return (
+    <AppSidebar
+      workspaces={workspaces}
+      currentWorkspaceId={currentWorkspaceId}
+    />
+  );
+}
+
+function SidebarSkeleton() {
+  return (
+    <div className="bg-background w-64 border-r p-4">
+      <Skeleton className="mb-4 h-12 w-full" />
+      <div className="space-y-2">
+        <Skeleton className="h-8 w-full" />
+        <Skeleton className="h-8 w-full" />
+        <Skeleton className="h-8 w-full" />
+      </div>
+    </div>
+  );
+}
+
+export default function DashboardLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
     <SidebarProvider>
-      <AppSidebar
-        workspaces={workspaces}
-        currentWorkspaceId={currentWorkspaceId}
-      />
+      <Suspense fallback={<SidebarSkeleton />}>
+        <SidebarContent />
+      </Suspense>
       <SidebarInset>
         <header
           className={cn(

@@ -91,13 +91,34 @@ export function KanbanProvider({
     const stored = localStorage.getItem(storageKey);
     const storedPending = localStorage.getItem(pendingKey);
 
+    console.log(
+      "🔍 KanbanProvider - Initial Board:",
+      initialBoard
+        ? { id: initialBoard.id, columnsCount: initialBoard.columns.length }
+        : null,
+    );
+    console.log(
+      "🔍 KanbanProvider - LocalStorage Board:",
+      stored ? "Found" : "Not found",
+    );
+
     if (stored) {
       try {
         const parsedBoard = JSON.parse(stored);
+        console.log(
+          "🔍 Parsed localStorage board:",
+          parsedBoard
+            ? { id: parsedBoard.id, columnsCount: parsedBoard.columns?.length }
+            : null,
+        );
         setBoard(parsedBoard);
       } catch (error) {
         console.error("Error parsing stored board:", error);
       }
+    } else if (initialBoard) {
+      // If no stored board, use initialBoard
+      console.log("✅ Using initialBoard from server");
+      setBoard(initialBoard);
     }
 
     if (storedPending) {

@@ -15,7 +15,7 @@ export async function getWorkspaceOrThrow(workspaceId: string) {
       OR: [
         { ownerId: session.user.id },
         {
-          members: {
+          WorkspaceMember: {
             some: { userId: session.user.id },
           },
         },
