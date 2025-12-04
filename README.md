@@ -32,7 +32,8 @@ A full-stack, production-ready productivity platform featuring real-time Kanban 
 
 <div align="center">
 
-<img width="1269" height="669" alt="kanvas landing page" src="https://github.com/user-attachments/assets/6fdfcfd6-a31c-4510-80e8-44dc67b70897" />
+<img width="1280" height="676" alt="kanvas land page" src="https://github.com/user-attachments/assets/4fd8702e-b1f7-4a44-8238-0b58dd1ed42e" />
+
 
 </div>
 
